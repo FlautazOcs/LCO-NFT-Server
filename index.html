@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Buy LCO NFT Membership</title>
+  <style>
+    body { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; padding: 2rem; text-align: center; }
+    input, select, button { padding: 0.8rem; margin: 1rem; font-size: 1rem; width: 300px; }
+  </style>
+</head>
+<body>
+  <h1>Buy Your LCO NFT Membership</h1>
+  <p>Enter your wallet address and select a tier:</p>
+  <form id="mint-form">
+    <input type="text" id="wallet" placeholder="0xYourWalletAddress" required />
+    <select id="tier">
+      <option value="Bronze">Bronze - $100</option>
+      <option value="Silver">Silver - $250</option>
+      <option value="Gold">Gold - $500</option>
+    </select><br />
+    <button type="submit">Continue to Payment</button>
+  </form>
+  <script>
+    const stripeLinks = {
+      Bronze: "https://buy.stripe.com/14AaEXc3V9RH7O76Pc93y0i",
+      Silver: "https://buy.stripe.com/00w3cv2tl1lb6K30qO93y0h",
+      Gold: "https://buy.stripe.com/aFadR94BtaVLfgza1o93y0g"
+    };
+    document.getElementById("mint-form").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const tier = document.getElementById("tier").value;
+      const wallet = document.getElementById("wallet").value;
+      const link = `${stripeLinks[tier]}?client_reference_id=${wallet}`;
+      window.location.href = link;
+    });
+  </script>
+</body>
+</html>
